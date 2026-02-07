@@ -7,10 +7,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import streamlit as st
 
-DATA_PATH = os.environ.get(
-    "AQI_DATASET_PATH",
-    "data/annual_aqi_by_county_2025.csv",
-)
+DATA_PATH = "data/annual_aqi_by_county_2025.csv"
 
 NUM_FIELDS = {
     "Year",
