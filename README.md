@@ -1,30 +1,102 @@
-## Introduction
+# Datathon 2026 — U.S. County Air Quality Intelligence Dashboard
 
-Clean air, safe water, and a stable environment are not equally distributed. The EPA Air Quality Index (AQI) by County dataset contains annual air quality metrics for every U.S. county, including counts of good, moderate, unhealthy, and hazardous days, as well as pollutant-specific exposure (CO, NO₂, Ozone, PM2.5, PM10).
+# Author: Winston Wihono, Celine Sachi, Jeha Lee, Wendy Shi
 
-As a Datathon participant, your team is challenged to explore environmental access and climate justice: Who is most exposed to pollution? Which communities face the highest long-term risk? How are environmental harms distributed across regions and populations?
+An interactive data science project analyzing historical air quality patterns across U.S. counties using a **data-driven severity index (DAQSI)**, clustering techniques, and a Streamlit visualization dashboard.
 
-This Datathon is your chance to turn real-world environmental data into actionable insights, revealing inequities, predicting future risks, and proposing solutions for a more livable planet.
+This project goes beyond counting unhealthy days. It builds a **statistically principled Air Quality Severity Index**, clusters counties by **multi-year behavior**, and presents the results in an interactive dashboard.
 
-## Tasks
+---
 
-Your task is to answer one or more of the following questions, or any other question that sparks curiosity in you and your team regarding the dataset:
+## Project Goals
 
-### Machine Learning / Predictive Modeling
+- Construct a **Data-Driven AQ Severity Index (DAQSI)** using log-frequency weighting
+- Analyze air quality patterns from **2019–2025**
+- Identify **high-risk air quality regimes** using clustering
+- Visualize patterns with an interactive **Streamlit dashboard**
+- Provide a reproducible pipeline from raw EPA data → insight
 
-Teams interested in ML may attempt tasks such as:
+---
 
-- Predict **next year’s Max AQI or number of Unhealthy Days** for a county using historical data
-- Predict **which counties will experience the highest pollution peaks** (Max AQI or 90th percentile AQI)
-- Cluster counties based on historical air quality patterns to identify **high-risk regions**
-- Model **pollutant-specific trends** to anticipate which pollutants pose the greatest long-term risk
+Core Methodology
 
-### Data Analytics and Data Visualization
+### 1. Data-Driven AQ Severity Index (DAQSI)
 
-The following questions can be attempted by analytics and visualization teams:
+Instead of arbitrary weights, AQI categories are weighted by:
 
-- Which counties or states experience the **most Unhealthy or Hazardous Days**?
-- How does air quality vary by **region, urbanicity, or proximity to industrial areas**?
-- Compare exposure to specific pollutants (PM2.5, Ozone, NO₂) across counties
-- Visualize trends over time in AQI: identify improving or worsening regions
-- Identify areas at the **intersection of high pollution and vulnerable populations**
+\[
+w = -\log(\text{frequency})
+\]
+
+Rare, dangerous days receive higher weight.  
+Common, clean days receive lower weight.  
+Good days subtract from the score.
+
+This produces a **standardized, comparable environmental burden metric**.
+
+Implemented in:
+aqsi_gen.py
+
+---
+
+### 2. Multi-Year Behavioral Clustering
+
+Counties are not ranked by magnitude.  
+They are clustered by **AQSI trajectory from 2019–2025**:
+
+\[
+[DAQSI_{2019}, ..., DAQSI_{2025}]
+\]
+
+This reveals:
+
+- Chronically polluted regions
+- Wildfire-driven episodic regions
+- Consistently clean regions
+- Regions with changing trends
+
+Implemented in:
+cluster.py
+
+---
+
+### 3. Interactive Dashboard
+
+The Streamlit app visualizes:
+
+- Counties and states with worst air days
+- Pollutant exposure composition
+- Regional AQI trends
+- Severity distribution by region
+
+Implemented in:
+dashboard.py
+
+# Setup dashboard and running dashboard locally
+
+### Install dependencies
+
+```bash
+python -m pip install -r requirements.txt
+python -m streamlit run dashboard.py
+```
+
+## Repository Structure
+datathon2026/
+│
+├── dashboard.py # Streamlit dashboard app
+├── aqsi_gen.py # DAQSI metric generator
+├── cluster.py # K-means clustering on AQSI time series
+├── requirements.txt # Python dependencies
+│
+├── data/
+│ ├── annual_aqi_by_county_2019.csv
+│ ├── annual_aqi_by_county_2020.csv
+│ ├── annual_aqi_by_county_2021.csv
+│ ├── annual_aqi_by_county_2022.csv
+│ ├── annual_aqi_by_county_2023.csv
+│ ├── annual_aqi_by_county_2024.csv
+│ ├── annual_aqi_by_county_2025.csv
+│ └── aqsi_all_years.csv # Generated combined dataset with DAQSI
+│
+└── assets/ # (optional) images or visuals
