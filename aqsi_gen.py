@@ -53,4 +53,5 @@ for f in files:
     processed_dfs.append(df)
 
 final_df = pd.concat(processed_dfs, ignore_index=True)
+final_df.to_csv("aqsi_all_years.csv", index=False)
 
