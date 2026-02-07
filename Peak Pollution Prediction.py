@@ -1,12 +1,12 @@
 import pandas as pd
 import os
 
-df1 = pd.read_csv("/Users/jehalee/Downloads/annual_aqi_by_county_2020.csv")
-df2 = pd.read_csv("/Users/jehalee/Downloads/annual_aqi_by_county_2021.csv")
-df3 = pd.read_csv("/Users/jehalee/Downloads/annual_aqi_by_county_2022.csv")
-df4 = pd.read_csv("/Users/jehalee/Downloads/annual_aqi_by_county_2023.csv")
-df5 = pd.read_csv("/Users/jehalee/Downloads/annual_aqi_by_county_2024.csv")
-df6 = pd.read_csv("/Users/jehalee/Downloads/annual_aqi_by_county_2025.csv")
+df1 = pd.read_csv("data/annual_aqi_by_county_2020.csv")
+df2 = pd.read_csv("data/annual_aqi_by_county_2021.csv")
+df3 = pd.read_csv("data/annual_aqi_by_county_2022.csv")
+df4 = pd.read_csv("data/annual_aqi_by_county_2023.csv")
+df5 = pd.read_csv("data/annual_aqi_by_county_2024.csv")
+df6 = pd.read_csv("data/annual_aqi_by_county_2025.csv")
 
 appended_df = pd.concat(
     [df1, df2, df3, df4, df5, df6],
