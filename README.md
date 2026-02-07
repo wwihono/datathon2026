@@ -64,8 +64,38 @@ python -m cluster
 ```
 
 ---
+### 3. Peak Pollution Prediction
+This project combines six years of EPA county-level AQI data (2020–2025) to identify places with consistently poor air quality.
 
-### 3. Interactive Dashboard
+What the script does:
+
+- Merges yearly AQI files into one dataset
+
+- Cleans inconsistent column names
+
+- Converts AQI fields to numeric
+
+- Aggregates by State + County across years
+
+Metrics computed per county:
+
+- Worst recorded AQI (max_aqi)
+
+- Chronic severity (p90_aqi)
+
+- Typical conditions (median_aqi)
+
+- Average unhealthy days (overall + sensitive groups)
+
+- Risk labels
+
+Using top 10% thresholds:
+Extreme Risk: high in both max and p90 AQI
+High Risk: high in one
+Lower Risk: below thresholds
+Unknown: missing data
+---
+### 4. Interactive Dashboard
 
 The Streamlit app visualizes:
 
