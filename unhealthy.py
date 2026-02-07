@@ -1,6 +1,5 @@
 import pandas as pd  
 import numpy as np
-import func as fun
 
 files = [
     "data/annual_aqi_by_county_2019.csv",
@@ -54,5 +53,4 @@ for f in files:
     processed_dfs.append(df)
 
 final_df = pd.concat(processed_dfs, ignore_index=True)
-print(final_df)
 
