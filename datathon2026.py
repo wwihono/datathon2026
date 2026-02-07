@@ -9,7 +9,7 @@ import streamlit as st
 
 DATA_PATH = os.environ.get(
     "AQI_DATASET_PATH",
-    "/Users/celine/Downloads/Access_to_a_Livable_Planet_Dataset.csv",
+    "data/annual_aqi_by_county_2025.csv",
 )
 
 NUM_FIELDS = {
