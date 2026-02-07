@@ -58,6 +58,11 @@ This reveals:
 Implemented in:
 cluster.py
 
+run using
+```bash
+python -m cluster
+```
+
 ---
 
 ### 3. Interactive Dashboard
