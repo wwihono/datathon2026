@@ -23,10 +23,10 @@ for k in range(1, 10):
   km.fit(X_scaled)
   inertia.append(km.inertia_)
 
-plt.plot(range(1,10), inertia, marker='o')
-plt.xlabel("K")
-plt.ylabel("Inertia")
-# plt.show()
+#plt.plot(range(1,10), inertia, marker='o')
+#plt.xlabel("K")
+#plt.ylabel("Inertia")
+#plt.show()
 
 kmeans = KMeans(n_clusters=4, random_state=42)
 clusters = kmeans.fit_predict(X_scaled)
@@ -35,13 +35,15 @@ pivot["Cluster"] = clusters
 
 cluster_patterns = pivot.groupby("Cluster").mean()
 
-kmeans = KMeans(n_clusters=4, random_state=42)
-pivot["Cluster"] = kmeans.fit_predict(X_scaled)
-
-cluster_patterns = pivot.groupby("Cluster").mean()
-print(cluster_patterns)
-
 clusters_df = pivot.reset_index()[["State", "County", "Cluster"]]
 clusters_df.head()
 
+for c in cluster_patterns.index:
+    plt.plot(cluster_patterns.columns, cluster_patterns.loc[c], label=f"Cluster {c}")
+
+plt.xlabel("Year")
+plt.ylabel("Average DAQSI")
+plt.legend()
+plt.title("Cluster Air Quality Patterns Over Time")
+plt.show()
 
