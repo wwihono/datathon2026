@@ -60,7 +60,7 @@ cluster.py
 
 run using
 ```bash
-python -m cluster
+python -m cluster.py
 ```
 
 ---
@@ -94,6 +94,11 @@ Extreme Risk: high in both max and p90 AQI
 High Risk: high in one
 Lower Risk: below thresholds
 Unknown: missing data
+
+un using
+```bash
+python -m prediction.py
+```
 ---
 ### 4. Interactive Dashboard
 
